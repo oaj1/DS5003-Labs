@@ -1,0 +1,25 @@
+#The dataset mpg contains information on miles per gallon (mpg) and engine size for cars sold from 1970 through 1982. The dataset has the features mpg, cylinders, displacement, horsepower, weight, acceleration, model_year, origin, and name.
+
+#Load the dataset mpg
+#Create a new dataframe using the columns weight and mpg
+#Use matplotlib to make a scatter plot of weight vs mpg labelling the x-axis Weight and the y-axis MPG
+
+import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
+
+# Load the mpg data set
+mpg = pd.read_csv('mpg.csv')
+
+# Create a new data frame with the columns "weight" and "mpg"
+mpgSmall =  mpg[['weight', 'mpg']]
+
+print(mpgSmall)
+
+# Create a scatter plot of weight vs mpg with x label "Weight" and y label "MPG"
+# Your code here
+plt.scatter(mpgSmall['weight'], mpgSmall['mpg'])
+plt.xlabel("Weight")
+plt.ylabel("MPG")
+
+plt.savefig('mpg_scatter.png')
