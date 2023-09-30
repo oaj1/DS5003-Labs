@@ -1,0 +1,36 @@
+#Load the dataset in titanic.csv as titanic.
+#6.9 LAB: Visualizing Titanic passenger statistics using bar charts
+#Create a new data frame, firstSouth, by subsetting titanic to include instances where a passenger is in the first class cabin (pclass feature is 1) and boarded from Southampton (embarked feature is S).
+#Create a new data frame, secondThird, by subsetting titanic to include instances where a passenger is either in the second (pclass feature is 2) or third class (pclass feature is 3) cabin.
+#Create bar charts for the following:
+#Passengers in first class who embarked in Southampton grouped by sex
+#Passengers in second and third class grouped by survival status
+
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Load titanic.csv
+titanic = pd.read_csv('titanic.csv')
+
+# Subset the titanic dataset to include first class passengers who embarked in Southampton
+firstSouth = titanic[(titanic["pclass"] == 1) &(titanic["embarked"] == 'S')]
+
+# Subset the titanic dataset to include either second or third class passenger
+secondThird = titanic[titanic["pclass"].isin([2,3])]
+
+print(firstSouth.head())
+print(secondThird.head())
+
+# Create a bar chart for the first class passengers who embarked in Southampton grouped by sex
+# Your code here
+first_south_grouped = firstSouth['sex'].value_counts()
+first_south_grouped.plot(kind='bar', title='First class passengers from Southampton by Sex')
+plt.savefig('titanic_bar_1.png')
+
+# Create a bar chart for the second and third class passengers grouped by survival status
+# Your code here
+second_third_grouped = secondThird['survived'].value_counts()
+second_third_grouped.plot(kind='bar', title='Second and Third class passengers by Survival Status')
+plt.legend(labels=["0","1"], title = "survived")
+plt.savefig('titanic_bar_2.png')
