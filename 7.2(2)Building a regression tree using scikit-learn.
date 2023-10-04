@@ -1,0 +1,38 @@
+#The dataset contains age and body measurements for a sample of hawks observed near Iowa City, Iowa.
+
+#Initialize the model using the DecisionTreeRegressor() type of regression tree with max_depth of 3 and the random number generator random_state set to rng.
+
+#Fit the model using the fit() method of the model with the correct parameters.
+
+#The code contains all imports, loads the dataset, and prints the tree.
+
+import pandas as pd
+import numpy as np
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.tree import export_text
+
+# Seed the random number generator
+rng = np.random.RandomState(0)
+
+# Read in the data
+hawkExample = pd.read_csv('hawkExample.csv')
+
+# Encode sex as a dummy variable
+hawkExampleWithDummy = pd.get_dummies(hawkExample, drop_first=True)
+
+# Assign outcome to y and features to X 
+y = hawkExampleWithDummy['Tail']
+X = hawkExampleWithDummy.drop('Tail', axis=1)
+
+# Initialize the model
+hawkRT = DecisionTreeRegressor(max_depth=3, random_state=rng)
+
+# Fit the model
+# Your code goes here
+hawkRT.fit(X,y)
+
+# Print regression tree info
+print('max_depth = ' + str(hawkRT.max_depth) + ', ' + str(hawkRT.random_state))
+
+# Print regression tree
+print(export_text(hawkRT, feature_names=X.columns.to_list()))
