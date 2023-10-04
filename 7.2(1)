@@ -1,0 +1,31 @@
+#The dataset contains species and body measurements for a sample of hawks observed near Iowa City, Iowa.
+
+#Fit the model using the fit() method of the model with the correct parameters.
+#The code contains all imports, loads the dataset, initializes the model, and prints the tree.
+
+import pandas as pd
+import numpy as np
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.tree import export_text
+
+# Seed the random number generator
+rng = np.random.RandomState(8)
+
+# Read in the data
+birdOfPreyExample = pd.read_csv('birdOfPreyExample.csv')
+
+# Encode sex as a dummy variable
+birdOfPreyExampleWithDummy = pd.get_dummies(birdOfPreyExample, drop_first=True)
+
+# Assign outcome to y and features to X 
+y = birdOfPreyExampleWithDummy['Weight']
+X = birdOfPreyExampleWithDummy.drop('Weight', axis=1)
+
+# Define model
+birdOfPreyRT = DecisionTreeRegressor(max_depth=2, min_samples_leaf=3, random_state=rng)
+
+# Fit the model
+birdOfPreyRT.fit(X,y)
+
+# Print regression tree
+print(export_text(birdOfPreyRT, feature_names=X.columns.to_list()))
