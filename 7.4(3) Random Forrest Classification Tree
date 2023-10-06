@@ -26,10 +26,10 @@ XTrain, XTest, yTrain, yTest = train_test_split(X, y, test_size=0.4, random_stat
 
 # Your code goes here
 # Initialize the model -- random forest classifier
-hawkRFC = RandomForestClassifier(n_estimators = 68, bootstrap = True, random_state = True) 
+hawkRFC = RandomForestClassifier(n_estimators = 68, bootstrap = True, random_state = rng) 
 
 # Fit the model with training data
-hawkRFC = hawkRFC.fit(X,y)
+hawkRFC = hawkRFC.fit(XTrain,yTrain)
 
 # Print first and last random trees generated in the forest
 print('First tree:')
