@@ -1,0 +1,33 @@
+#The dataset mpg contains information on miles per gallon (mpg) and engine size for cars sold from 1970 through 1982. The dataset has the features mpg, cylinders, displacement, horsepower, weight, acceleration, model_year, origin, and name.
+
+#Load the mpg.csv dataset
+#Create a dataframe, X, using weight and model_year as features
+#Create a dataframe, y, using mpg
+#Initialize a regression tree with random_state = 100 that has depth 3 and a minimum number of samples in each leaf of 5
+#Fit the regression tree on X
+
+# Load the necessary libraries
+import pandas as pd
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.tree import export_text
+
+# Load the mpg dataset
+mpg = pd.read_csv('mpg.csv')
+
+# Subset the data containing weight and model_year
+X = mpg[['weight', 'model_year']]
+
+# Subset the data containing mpg
+y = mpg['mpg']
+
+# Initialize a regression tree with random_state = 100
+# that has depth 3 and a minimum number of samples in each leaf of 5
+mpgRT = DecisionTreeRegressor(random_state = 100, max_depth = 3, min_samples_leaf = 5)
+
+# Fit the X and y data
+mpgRT.fit (X,y)
+
+# Print regression tree
+print("max_depth = %s, %s"% (mpgRT.max_depth, mpgRT.random_state))
+# Print tree
+print(export_text(mpgRT, feature_names=X.columns.to_list()))
